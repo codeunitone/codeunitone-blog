@@ -5,7 +5,7 @@
   {{ with .Description | default site.Params.description }}
   <meta name="description" content="{{ . }}">
   {{ end }}
-  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <link rel="stylesheet" href="{{ " css/style.css" | relURL }}">
   {{ with .OutputFormats.Get "rss" }}
   <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">
   {{ end }}

@@ -18,13 +18,13 @@ Only Business Central OnPrem is supporting the DotNet datatype. The code shown h
 
 To enable DotNet in your application you need to set `target` to `onPrem` in your `app.json`.
 
-{{< highlight "" >}}
+```
 {
     ...
     "target": "OnPrem"
     ...
 }
-{{< / highlight >}}
+```
 
 ## **Implementation**
 
@@ -33,7 +33,7 @@ To enable DotNet in your application you need to set `target` to `onPrem` in you
 Before being able to use DotNet in your app, you need to declare all needed Assemblys in a DotNet package.
 
 **Example**
-{{< highlight "" >}}
+```
 dotnet
 {
     assembly(<NameOfTheAssembly>)
@@ -41,11 +41,11 @@ dotnet
         type(<ClassName>; <YourAliasForIt>) { }
     }
 }
-{{< / highlight >}}
+```
 
 For writing into the EventLog we need the class `EventLog` and the enum `EventLogEntryType` of the assembly `System`
 
-{{< highlight "" >}}
+```
 dotnet
 {
     assembly(System)
@@ -54,13 +54,13 @@ dotnet
         type(System.Diagnostics.EventLogEntryType; WinEventLogEntryType) { }
     }
 }
-{{< /highlight >}}
+```
 
 ### **Event Log Management Codeunit**
 
 After declaring the DotNet package, you can use these defined DotNet types via the specified aliases.
 
-{{< highlight "" >}}
+```
 codeunit 50100 "Windows-EventLog Management"
 {
     procedure WriteEventlog()
@@ -71,12 +71,12 @@ codeunit 50100 "Windows-EventLog Management"
         // ...
     end;
 }
-{{< /highlight >}}
+```
 
 The Windows Eventlog has different Logs such as Application, System, Security, and so on. Each entry belongs to one of these logs. Furthermore, a Log entry does have a source. Sources can be any free text. Usually, it's the name of the Application. Besides the Source, Logs are needed to created first - except for the windows standard ones.
 To keep it simple I decided to write into the `Application` log. The source I set to `MicrosoftDynamicsNav`.
 
-{{< highlight "" >}}
+```
 codeunit 50100 "Windows-EventLog Management"
 {
     procedure WriteEventlog()
@@ -90,11 +90,11 @@ codeunit 50100 "Windows-EventLog Management"
         EventLog.Source := EventLogSource;
     end;
 }
-{{< /highlight >}}
+```
 
 After the EventLog Class is instantiated we can use the function `WriteEntry` to create the Event Log Entry. That function takes a string as the log message and the Entry Type as a parameter. Entry Types can be `Information`, `Warning` or `Error`.
 
-{{< highlight "" >}}
+```
 codeunit 50100 "Windows-EventLog Management"
 {
     procedure WriteEventlog()
@@ -111,19 +111,19 @@ codeunit 50100 "Windows-EventLog Management"
         EventLog.Dispose;
     end;
 }
-{{< /highlight >}}
+```
 
 ### **Checking the Event Log**
 
 After using the functuin we just created, you will find the following entry in your Event Log.
 
-{{< highlight "">}}
+```
 PS C:\> Get-EventLog -LogName Application -Newest 1 -Before '2020-11-01 14:47' | Format-Table -wrap
 
    Index Time          EntryType   Source                 InstanceID Message
    ----- ----          ---------   ------                 ---------- -------
     1594 Nov 01 14:32  Information MicrosoftDynamicsNav            0 Hello World
-{{< /highlight >}}
+```
 
 
 ## **Code on Github**

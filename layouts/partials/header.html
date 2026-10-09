@@ -1,10 +1,22 @@
-<header class="site-header">
-  <div class="container header-container">
-    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
-    <nav class="site-nav">
+<nav class="top-nav">
+  <div class="container nav-container">
+    <div class="nav-links">
       {{ range site.Menus.main }}
       <a href="{{ .URL | relURL }}">{{ .Name }}</a>
       {{ end }}
-    </nav>
+    </div>
+  </div>
+</nav>
+
+<header class="site-header">
+  <div class="container header-container">
+    <div class="titles">
+      <h1 class="site-title">
+        <a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+      </h1>
+      {{ with site.Params.description }}
+      <span class="site-subtitle">{{ . }}</span>
+      {{ end }}
+    </div>
   </div>
 </header>
