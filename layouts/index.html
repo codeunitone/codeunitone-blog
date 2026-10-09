@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="home-intro">
+  <h1>Welcome to {{ site.Title }}</h1>
+  {{ with site.Params.description }}
+  <p class="intro-description">{{ . }}</p>
+  {{ end }}
+</section>
+
+<section class="recent-posts">
+  <h2>Recent Posts</h2>
+  <ul class="posts-list">
+    {{ range (where site.RegularPages "Section" "post") }}
+    <li class="post-item">
+      <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+      <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

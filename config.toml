@@ -1,0 +1,31 @@
+baseURL = "https://codeunitone.de"
+title = "codeunitone"
+locale = "en"
+enableEmoji = true
+enableRobotsTXT = true
+paginate = 10
+
+[permalinks]
+  post = "/:section/:contentbasename/"
+
+[params]
+  author = "Benjamin"
+  description = "A blog about Dynamics NAV / Business Central development, backend, performance, and tooling."
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts"
+    url = "/post/"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+  [[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/codeunitone"
+    weight = 4

@@ -1,1 +1,4 @@
-public
+# Hugo build output and temporary files
+public/
+resources/_gen/
+.hugo_build.lock
