@@ -1,0 +1,10 @@
+{{- $url := urls.Parse .Destination -}}
+{{- $href := .Destination -}}
+{{- if and (not $url.IsAbs) (not (hasPrefix $href "#")) -}}
+  {{- if eq $href "/" -}}
+    {{- $href = site.Home.RelPermalink -}}
+  {{- else -}}
+    {{- $href = (strings.TrimPrefix "/" $href) | relURL -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $url.IsAbs }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
